@@ -558,7 +558,7 @@ SLRM no busca ser "compatible" por estética con las redes actuales. Busca ser u
 
 ### 4.10 INEFICIENCIA REPRESENTACIONAL: EL COLAPSO POR ECUACIONES
 
-Se establece una distinción crítica entre la capacidad de cálculo y la capacidad de almacenamiento.
+Se establece una distinción crítica entre la capacidad de cálculo y la capacidad de almacenamiento.   
 Una ecuación lineal (sea de tipo Simplex o inducida por activaciones como ReLU) puede modelar correctamente una región local del hiperespacio. Sin embargo, utilizar ecuaciones paramétricas fijas como unidad persistente de conocimiento se vuelve estructuralmente problemático en altas dimensiones.
 
 La Trampa de la Dimensionalidad
