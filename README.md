@@ -556,7 +556,7 @@ SLRM does not seek aesthetic "compatibility" with current networks. It seeks to 
 
 > **Verdict:** SLRM does not need mathematical "disguises." The linear weighted equation is sufficient, elegant, and superior in efficiency when the geometric base is solid. Forcing compatibility with the past only adds noise to the future.
 
-### 4.10 REPRESENTATIONAL INEFFICIENCY: COLLAPSE BY EQUATIONS
+### 4.10 REPRESENTATIONAL INEFFICIENCY: THE COLLAPSE BY EQUATIONS
 
 A critical distinction is established between computational capacity and storage capacity.   
 A linear equation (whether of the Simplex type or induced by activations such as ReLU) can correctly model a local region of the hyperspace. However, using fixed parametric equations as a persistent unit of knowledge becomes structurally problematic in high dimensions.
