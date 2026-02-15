@@ -15,7 +15,7 @@
 **SLRM Team:**   
 Alex · Gemini · ChatGPT   
 Claude · Grok · Meta AI   
-**Version:** 0.2.7  
+**Version:** 0.2.9  
 **License:** MIT  
 
 ---
@@ -558,14 +558,29 @@ SLRM no busca ser "compatible" por estética con las redes actuales. Busca ser u
 
 ### 4.10 INEFICIENCIA REPRESENTACIONAL: EL COLAPSO POR ECUACIONES
 
-Se establece una distinción crítica entre la capacidad de cálculo y la capacidad de almacenamiento. Aunque una ecuación tipo ReLU o Simplex puede modelar un sector del hiperespacio, su uso como unidad de persistencia de datos es inviable en altas dimensiones.
+Se establece una distinción crítica entre la capacidad de cálculo y la capacidad de almacenamiento.
+Una ecuación lineal (sea de tipo Simplex o inducida por activaciones como ReLU) puede modelar correctamente una región local del hiperespacio. Sin embargo, utilizar ecuaciones paramétricas fijas como unidad persistente de conocimiento se vuelve estructuralmente problemático en altas dimensiones.
 
-- La Trampa de la Dimensionalidad
-En un entorno 10D, un solo bloque de 1024 puntos (un Politopo) contiene $10!$ ($3,628,800$) Símplex no solapados. Si se intentara representar cada uno mediante una ecuación individual:
-1. Cada ecuación requiere $D+1$ términos ($11$ términos en 10D).
-2. El resultado supera los **40 millones de términos matemáticos** para representar apenas **1024 puntos** originales.
+La Trampa de la Dimensionalidad
 
-> **Veredicto:** Intentar "guardar" el conocimiento mediante una red de ecuaciones fijas (como pretenden algunos modelos de caja negra o aproximaciones ReLU masivas) es un error de arquitectura. El SLRM concluye que en general la ecuación debe ser **efímera**: se genera para la inferencia y se descarta, nunca se almacena.
+En estructuras geométricas simples, como un hipercubo en 10 dimensiones, la triangulación exacta requiere $D!$ símplex no solapados. En 10D, esto implica:
+
+$10! = 3,628,800$
+
+regiones lineales distintas.
+
+Si cada región se almacenara como una ecuación explícita:
+
+1. Cada símplex requiere al menos $D+1$ coeficientes (11 en 10D).
+
+2. El almacenamiento crece factorialmente con la dimensión.
+
+3. La representación explícita se vuelve rápidamente inviable incluso para estructuras geométricas simples.
+
+Este fenómeno no depende de un conjunto particular de puntos, sino de la naturaleza combinatoria de la partición geométrica en alta dimensión.
+
+> **Veredicto:** La representación persistente mediante redes de ecuaciones fijas conduce a ineficiencia estructural cuando la dimensionalidad crece.   
+SLRM propone una alternativa: la ecuación no debe almacenarse como conocimiento, sino generarse de forma efímera durante la inferencia a partir de una estructura geométrica persistente.
 
 ---
 
