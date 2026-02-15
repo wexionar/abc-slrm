@@ -15,7 +15,7 @@
 **SLRM Team:**   
 Alex · Gemini · ChatGPT   
 Claude · Grok · Meta AI   
-**Version:** 0.2.7   
+**Version:** 0.2.9   
 **License:** MIT   
 
 ---
@@ -556,16 +556,29 @@ SLRM does not seek aesthetic "compatibility" with current networks. It seeks to 
 
 > **Verdict:** SLRM does not need mathematical "disguises." The linear weighted equation is sufficient, elegant, and superior in efficiency when the geometric base is solid. Forcing compatibility with the past only adds noise to the future.
 
-### 4.10 REPRESENTATIONAL INEFFICIENCY: THE COLLAPSE BY EQUATIONS
+### 4.10 REPRESENTATIONAL INEFFICIENCY: COLLAPSE BY EQUATIONS
 
-A critical distinction is established between computational capacity and storage capacity. Although a ReLU or Simplex-type equation can model a sector of hyperspace, its use as a unit for data persistence is unfeasible in high dimensions.
+A critical distinction is established between computational capacity and storage capacity.   
+A linear equation (whether of the Simplex type or induced by activations such as ReLU) can correctly model a local region of the hyperspace. However, using fixed parametric equations as a persistent unit of knowledge becomes structurally problematic in high dimensions.
 
-- The Dimensionality Trap
-In a 10D environment, a single block of 1024 points (a Polytope) contains $10!$ ($3,628,800$) non-overlapping Simplexes. If one were to attempt to represent each one through an individual equation:
-1. Each equation requires $D+1$ terms ($11$ terms in 10D).
-2. The result exceeds **40 million mathematical terms** to represent barely **1024 original points**.
+The Dimensionality Trap
 
-> **Verdict:** Attempting to "store" knowledge through a network of fixed equations (as pursued by some black-box models or massive ReLU approximations) is an architectural error. The SLRM concludes that, in general, the equation must be **ephemeral**: it is generated for inference and then discarded; it is never stored.
+In simple geometric structures, such as a 10-dimensional hypercube, exact triangulation requires $D!$ non-overlapping simplexes. In 10D, this implies:
+
+$10! = 3,628,800$
+
+distinct linear regions.
+
+If each region were stored as an explicit equation:
+
+1. Each simplex requires at least $D+1$ coefficients (11 in 10D).
+2. Storage grows factorially with the dimension.
+3. Explicit representation quickly becomes unfeasible even for simple geometric structures.
+
+This phenomenon does not depend on a particular set of points, but on the combinatorial nature of geometric partitioning in high dimensions.
+
+> **Verdict:** Persistent representation through networks of fixed equations leads to structural inefficiency as dimensionality grows.   
+SLRM proposes an alternative: the equation should not be stored as knowledge, but rather generated ephemerally during inference from a persistent geometric structure.
 
 ---
 
