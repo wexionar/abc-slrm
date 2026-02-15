@@ -15,7 +15,7 @@
 **SLRM Team:**   
 Alex · Gemini · ChatGPT   
 Claude · Grok · Meta AI   
-**Version:** 0.2.4  
+**Version:** 0.2.7  
 **License:** MIT  
 
 ---
@@ -555,6 +555,17 @@ SLRM no busca ser "compatible" por estética con las redes actuales. Busca ser u
 * En un Símplex bien definido, la "activación" es una consecuencia natural de la posición del punto, no una decisión probabilística de un algoritmo.
 
 > **Veredicto:** SLRM no necesita "disfraces" matemáticos. La ecuación ponderada lineal es suficiente, elegante y superior en eficiencia cuando la base geométrica es sólida. Forzar la compatibilidad con el pasado solo añade ruido al futuro.
+
+### 4.10 INEFICIENCIA REPRESENTACIONAL: EL COLAPSO POR ECUACIONES
+
+Se establece una distinción crítica entre la capacidad de cálculo y la capacidad de almacenamiento. Aunque una ecuación tipo ReLU o Simplex puede modelar un sector del hiperespacio, su uso como unidad de persistencia de datos es inviable en altas dimensiones.
+
+- La Trampa de la Dimensionalidad
+En un entorno 10D, un solo bloque de 1024 puntos (un Politopo) contiene $10!$ ($3,628,800$) Símplex no solapados. Si se intentara representar cada uno mediante una ecuación individual:
+1. Cada ecuación requiere $D+1$ términos ($11$ términos en 10D).
+2. El resultado supera los **40 millones de términos matemáticos** para representar apenas **1024 puntos** originales.
+
+> **Veredicto:** Intentar "guardar" el conocimiento mediante una red de ecuaciones fijas (como pretenden algunos modelos de caja negra o aproximaciones ReLU masivas) es un error de arquitectura. El SLRM concluye que en general la ecuación debe ser **efímera**: se genera para la inferencia y se descarta, nunca se almacena.
 
 ---
 
