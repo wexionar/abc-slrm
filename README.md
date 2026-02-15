@@ -15,7 +15,7 @@
 **SLRM Team:**   
 Alex · Gemini · ChatGPT   
 Claude · Grok · Meta AI   
-**Version:** 0.2.4   
+**Version:** 0.2.7   
 **License:** MIT   
 
 ---
@@ -555,6 +555,17 @@ SLRM does not seek aesthetic "compatibility" with current networks. It seeks to 
 * In a well-defined Simplex, "activation" is a natural consequence of the point's position, not a probabilistic decision by an algorithm.
 
 > **Verdict:** SLRM does not need mathematical "disguises." The linear weighted equation is sufficient, elegant, and superior in efficiency when the geometric base is solid. Forcing compatibility with the past only adds noise to the future.
+
+### 4.10 REPRESENTATIONAL INEFFICIENCY: THE COLLAPSE BY EQUATIONS
+
+A critical distinction is established between computational capacity and storage capacity. Although a ReLU or Simplex-type equation can model a sector of hyperspace, its use as a unit for data persistence is unfeasible in high dimensions.
+
+- The Dimensionality Trap
+In a 10D environment, a single block of 1024 points (a Polytope) contains $10!$ ($3,628,800$) non-overlapping Simplexes. If one were to attempt to represent each one through an individual equation:
+1. Each equation requires $D+1$ terms ($11$ terms in 10D).
+2. The result exceeds **40 million mathematical terms** to represent barely **1024 original points**.
+
+> **Verdict:** Attempting to "store" knowledge through a network of fixed equations (as pursued by some black-box models or massive ReLU approximations) is an architectural error. The SLRM concludes that, in general, the equation must be **ephemeral**: it is generated for inference and then discarded; it is never stored.
 
 ---
 
