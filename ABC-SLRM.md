@@ -7,7 +7,7 @@ Alex · Gemini · ChatGPT<br>
 Claude · Grok · Meta AI<br>
 DeepSeek · GLM · Anna
 
-**Version:** 2.0<br>
+**Version:** 2.4<br>
 **License:** MIT<br>
 **Date:** 2026-02
 
@@ -329,4 +329,68 @@ This is not a replacement for all neural networks, but a **rigorous alternative*
 - *Developed for the global community of developers. Closing the gap between geometric logic and high-dimensional modeling.*
 
 - *Two paths diverged in the forest, we took the less traveled one, and that made everything different.*
+
+---
+
+## ANNEX I
+
+### THEORY OF CORE ENGINES
+
+Separating the theoretical from its implementation.
+
+1. **ATOM CORE:** Its logic for inferring consists of:
+
+- Locate the data point with the smallest Euclidean distance relative to the query point.
+
+- Infer the result by assuming the identity of the value of the found nearest neighbor.
+
+- Geometric Support: 1 Point (Pure Identity), in nD.
+
+2. **LOGOS CORE:** Its logic for inferring consists of:
+
+- Encapsulate the point to be inferred within a simplex (interval or segment), minimizing the distance between the query point and the vertices that delimit it.
+
+- Resolve the inference using the linear weighted equation (1D interpolation) based on the relative position within the segment.
+
+- Geometric Support: 2 Points (Interval limits), in 1D.
+
+3. **LUMIN CORE:** Its logic for inferring consists of:
+
+- Encapsulate the point to be inferred within a simplex (n-tetrahedron), such that the distance between the query point and the vertices is the minimum possible in the local space.
+
+- Resolve the inference using the linear weighted equation (barycentric coordinates), utilizing the vector basis of the simplex.
+
+- Geometric Support: D+1 Points (Unit Simplex), in nD.
+
+4. **NEXUS CORE:** Its logic for inferring consists of:
+
+- Encapsulate the point to be inferred within a polytope of 2^D vertices, minimizing the distance between these and the query point.
+
+- Proposal A. Jacobian Matrix: Used to transform the irregular polytope from the global space to a unit hypercube in a local space (natural space). Once normalized, it is resolved via multilinear interpolation, ensuring continuity throughout the volume.
+
+- Proposal B. Kuhn Partition: The polytope is subdivided into D! (factorial of the dimension) simplexes by means of a hierarchical ordering of coordinates. The specific simplex containing the query is identified and resolved by means of a linear weighted equation.
+
+- Geometric Support: 2^D Points (Unit Polytope), in nD.
+
+**NOTES:**
+
+1. Mapping via Jacobian Matrix requires convexity in the polytope. In cells with extreme irregularity (reentrant angles), the determinant of the Jacobian can become null or negative, invalidating the inference.
+
+2. Faced with non-convex polytopes, Proposal B (Kuhn) must be prioritized, given that the subdivision into simplexes is inherently immune to collapses due to geometric deformation.
+
+3. The optimal support configuration for Lumin Core consists of an equilateral simplex whose incenter coincides with the query point. For Nexus Core, the ideal scenario is an orthotope (or hypercube) where the point to be inferred is located at its geometric center.
+
+4. The Logos Core engine is a particular case of the Lumin Core engine when n in nD is equal to 1.
+
+5. The Nexus Core engine (Proposal B) resolves the inference just like the Lumin Core engine by means of the linear weighted equation starting from a simplex that contains the point to be inferred.
+
+6. Therefore, SLRM basically proposes two fundamental families of inference:
+
+- Inference by Identity/Proximity: (Atom Core).
+
+- Inference by Simplex Weighting: (Logos, Lumin, Nexus Core Proposal B).
+
+---
+
+- *In theory we must be mathematicians, but in implementation we must be engineers.*
  
