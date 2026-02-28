@@ -7,7 +7,7 @@ Alex · Gemini · ChatGPT<br>
 Claude · Grok · Meta AI<br>
 DeepSeek · GLM · Anna
 
-**Versión:** 2.0<br>
+**Versión:** 2.4<br>
 **Licencia:** MIT<br>
 **Fecha:** 2026-02
 
@@ -329,4 +329,68 @@ Esto no es un reemplazo para todas las redes neuronales, sino una **alternativa 
 - *Desarrollado para la comunidad global de desarrolladores. Cerrando la brecha entre la lógica geométrica y el modelado de alta dimensionalidad.*
 
 - *Dos caminos divergían en el bosque, nosotros tomamos el menos transitado, y eso hizo que todo fuera diferente.*
+
+---
+
+## ANEXO I
+
+### TEORÍA DE LOS MOTORES CORE
+
+Separar lo teórico de su implementación.
+
+1. **ATOM CORE:** Su lógica para inferir consiste en:
+
+- Localizar el punto dato con la menor distancia euclidiana respecto al punto de consulta.
+
+- Inferir el resultado asumiendo la identidad del valor del vecino más cercano hallado.
+
+- Soporte Geométrico: 1 Punto (Identidad Pura), en nD.
+
+2. **LOGOS CORE:** Su lógica para inferir consiste en:
+
+- Encapsular el punto a inferir dentro de un simplex (intervalo o segmento), minimizando la distancia entre el punto de consulta y los vértices que lo delimitan.
+
+- Resolver la inferencia mediante la ecuación ponderada lineal (interpolación 1D) basada en la posición relativa dentro del segmento.
+
+- Soporte Geométrico: 2 Puntos (Límites del intervalo), en 1D.
+
+3. **LUMIN CORE:** Su lógica para inferir consiste en:
+
+- Encapsular el punto a inferir dentro de un simplex (n-tetraedro), tal que la distancia entre el punto de consulta y los vértices sea la mínima posible en el espacio local.
+
+- Resolver la inferencia mediante la ecuación ponderada lineal (coordenadas baricéntricas), utilizando la base vectorial del simplex.
+
+- Soporte Geométrico: D+1 Puntos (Simplex Unitario), en nD.
+
+4. **NEXUS CORE:** Su lógica para inferir consiste en:
+
+- Encapsular el punto a inferir dentro de un polítopo de 2^D vértices, minimizando la distancia entre estos y el punto de consulta.
+
+- Propuesta A. Matriz Jacobiana: Se utiliza para transformar el polítopo irregular del espacio global a un hipercubo unitario en un espacio local (espacio natural). Una vez normalizado, se resuelve mediante interpolación multilineal, asegurando continuidad en todo el volumen.
+
+- Propuesta B. Partición de Kuhn: El polítopo se subdivide en D! (factorial de la dimensión) simplices mediante una ordenación jerárquica de coordenadas. Se identifica el simplex específico que contiene la consulta y se resuelve mediante ecuación ponderada lineal.
+
+- Soporte Geométrico: 2^D Puntos (Polítopo Unitario), en nD.
+
+**NOTAS:**
+
+1. El mapeo mediante Matriz Jacobiana exige convexidad en el polítopo. En celdas con irregularidad extrema (ángulos reentrantes), el determinante del Jacobiano puede anularse o ser negativo, invalidando la inferencia.
+
+2. Ante polítopos no-convexos, debe priorizarse la Propuesta B (Kuhn), dado que la subdivisión en simplices es inherentemente inmune a colapsos por deformación geométrica.
+
+3. La configuración óptima de soporte para Lumin Core consiste en un simplex equilátero cuyo incentro coincida con el punto de consulta. Para Nexus Core, el escenario ideal es un ortotopo (o hipercubo) donde el punto a inferir se localice en su centro geométrico.
+
+4. El motor Logos Core es un caso particular del motor Lumin Core cuando n en nD es igual a 1.
+
+5. El motor Nexus Core (Propuesta B) resuelve la inferencia al igual que el motor Lumin Core mediante la ecuación ponderada lineal a partir de un simplex que contiene al punto a inferir.
+
+6. Por lo tanto, SLRM propone básicamente dos familias fundamentales de inferencia:
+
+- Inferencia por Identidad/Proximidad: (Atom Core).
+
+- Inferencia por Ponderación Simplex: (Logos, Lumin, Nexus Core Propuesta B).
+
+---
+
+- *En lo teórico debemos ser matemáticos pero en su implementación debemos ser ingenieros.*
  
